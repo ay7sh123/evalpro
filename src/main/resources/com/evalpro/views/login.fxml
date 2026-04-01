@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.evalpro.controller.LoginController"
+           prefWidth="900" prefHeight="650"
+           style="-fx-background-color: #F7F7F7;">
+
+    <HBox>
+        <!-- Left Panel - Purple -->
+        <VBox prefWidth="420" prefHeight="650"
+              style="-fx-background-color: #5B4FCF;"
+              alignment="CENTER"
+              spacing="16">
+
+            <StackPane>
+                <Circle radius="50"
+                        style="-fx-fill: rgba(255,255,255,0.15);"/>
+                <Label text="E"
+                       style="-fx-font-size: 40px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: white;"/>
+            </StackPane>
+
+            <Label text="EvalPro"
+                   style="-fx-font-size: 32px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: white;"/>
+
+            <Label text="AI-Powered Examination System"
+                   style="-fx-font-size: 13px;
+                          -fx-text-fill: rgba(255,255,255,0.7);"/>
+
+            <VBox spacing="12" alignment="CENTER"
+                  style="-fx-padding: 30 40 0 40;">
+                <Label text="✓  AI Question Generation"
+                       style="-fx-text-fill: rgba(255,255,255,0.8);
+                              -fx-font-size: 12px;"/>
+                <Label text="✓  Smart Auto Scoring"
+                       style="-fx-text-fill: rgba(255,255,255,0.8);
+                              -fx-font-size: 12px;"/>
+                <Label text="✓  Built-in Coding Editor"
+                       style="-fx-text-fill: rgba(255,255,255,0.8);
+                              -fx-font-size: 12px;"/>
+                <Label text="✓  Tab Switch Detection"
+                       style="-fx-text-fill: rgba(255,255,255,0.8);
+                              -fx-font-size: 12px;"/>
+            </VBox>
+
+            <Label text="v1.0  •  For All Departments"
+                   style="-fx-font-size: 10px;
+                          -fx-text-fill: rgba(255,255,255,0.4);
+                          -fx-padding: 40 0 0 0;"/>
+        </VBox>
+
+        <!-- Right Panel - Login Form -->
+        <VBox prefWidth="480" prefHeight="650"
+              alignment="CENTER"
+              spacing="0"
+              style="-fx-background-color: white;
+                     -fx-padding: 50 60 60 60;">
+
+            <!-- Back Button -->
+            <HBox alignment="TOP_LEFT" prefWidth="360">
+                <Button text="← Back to Home"
+                        onAction="#goBack"
+                        style="-fx-background-color: transparent;
+                               -fx-text-fill: #5B4FCF;
+                               -fx-font-size: 12px;
+                               -fx-cursor: hand;
+                               -fx-border-width: 0;
+                               -fx-padding: 0 0 24 0;"/>
+            </HBox>
+
+            <Label text="Welcome Back"
+                   style="-fx-font-size: 26px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #1a1a1a;"/>
+
+            <Label text="Sign in to your account"
+                   style="-fx-font-size: 13px;
+                          -fx-text-fill: #888888;
+                          -fx-padding: 6 0 30 0;"/>
+
+            <!-- Email Field -->
+            <Label text="Email Address"
+                   style="-fx-font-size: 12px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #444444;
+                          -fx-padding: 0 0 6 0;"/>
+            <TextField fx:id="emailField"
+                       promptText="Enter your email"
+                       style="-fx-font-size: 13px;
+                              -fx-padding: 12;
+                              -fx-background-radius: 8;
+                              -fx-border-radius: 8;
+                              -fx-border-color: #e0e0e0;
+                              -fx-border-width: 1;
+                              -fx-background-color: #fafafa;"/>
+
+            <!-- Password Field -->
+            <Label text="Password"
+                   style="-fx-font-size: 12px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #444444;
+                          -fx-padding: 16 0 6 0;"/>
+            <PasswordField fx:id="passwordField"
+                           promptText="Enter your password"
+                           style="-fx-font-size: 13px;
+                                  -fx-padding: 12;
+                                  -fx-background-radius: 8;
+                                  -fx-border-radius: 8;
+                                  -fx-border-color: #e0e0e0;
+                                  -fx-border-width: 1;
+                                  -fx-background-color: #fafafa;"/>
+
+            <!-- Error Message -->
+            <Label fx:id="errorLabel"
+                   text=""
+                   style="-fx-text-fill: #e53935;
+                          -fx-font-size: 12px;
+                          -fx-padding: 8 0 0 0;"/>
+
+            <!-- Login Button -->
+            <Button fx:id="loginButton"
+                    text="Sign In"
+                    onAction="#handleLogin"
+                    prefWidth="360"
+                    style="-fx-background-color: #5B4FCF;
+                           -fx-text-fill: white;
+                           -fx-font-size: 14px;
+                           -fx-font-weight: bold;
+                           -fx-padding: 13;
+                           -fx-background-radius: 8;
+                           -fx-cursor: hand;"/>
+
+            <Label text="─────────────────────────────────"
+                   style="-fx-text-fill: #eeeeee;
+                          -fx-padding: 20 0 10 0;"/>
+
+            <Label text="Demo Accounts for Testing"
+                   style="-fx-font-size: 11px;
+                          -fx-text-fill: #aaaaaa;"/>
+
+            <VBox spacing="4" style="-fx-padding: 10 0 0 0;">
+                <Label text="Teacher  →  teacher@evalpro.com  /  teacher123"
+                       style="-fx-font-size: 10px; -fx-text-fill: #bbbbbb;"/>
+                <Label text="Student  →  student@evalpro.com  /  student123"
+                       style="-fx-font-size: 10px; -fx-text-fill: #bbbbbb;"/>
+                <Label text="Admin    →  admin@evalpro.com    /  admin123"
+                       style="-fx-font-size: 10px; -fx-text-fill: #bbbbbb;"/>
+            </VBox>
+
+        </VBox>
+    </HBox>
+
+</StackPane>

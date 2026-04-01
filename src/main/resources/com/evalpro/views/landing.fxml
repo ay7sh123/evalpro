@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.evalpro.controller.LandingController"
+           prefWidth="900" prefHeight="650"
+           style="-fx-background-color: #F7F7F7;">
+
+    <VBox alignment="TOP_CENTER" spacing="0">
+
+        <!-- NAV BAR -->
+        <HBox prefHeight="60" prefWidth="900"
+              alignment="CENTER_LEFT"
+              style="-fx-background-color: white;
+                     -fx-border-color: #eeeeee;
+                     -fx-border-width: 0 0 1 0;
+                     -fx-padding: 0 30 0 30;">
+
+            <StackPane>
+                <Circle radius="18" style="-fx-fill: #5B4FCF;"/>
+                <Label text="E"
+                       style="-fx-font-size: 14px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: white;"/>
+            </StackPane>
+
+            <Label text="EvalPro"
+                   style="-fx-font-size: 18px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #1a1a1a;
+                          -fx-padding: 0 0 0 10;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="Features"
+                    onAction="#scrollToFeatures"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: #666666;
+                           -fx-font-size: 13px;
+                           -fx-cursor: hand;
+                           -fx-border-width: 0;
+                           -fx-padding: 0 20 0 0;"/>
+
+            <Button text="About"
+                    onAction="#showAbout"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: #666666;
+                           -fx-font-size: 13px;
+                           -fx-cursor: hand;
+                           -fx-border-width: 0;
+                           -fx-padding: 0 20 0 0;"/>
+
+            <Button text="Login"
+                    onAction="#goToLogin"
+                    style="-fx-background-color: #5B4FCF;
+                           -fx-text-fill: white;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: bold;
+                           -fx-padding: 8 20 8 20;
+                           -fx-background-radius: 6;
+                           -fx-cursor: hand;"/>
+        </HBox>
+
+        <!-- HERO SECTION -->
+        <VBox alignment="CENTER" spacing="14"
+              prefHeight="310"
+              style="-fx-padding: 50 80 30 80;
+                     -fx-background-color: white;">
+
+            <Label text="Smarter Exams, Better Results"
+                   style="-fx-font-size: 36px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #1a1a1a;"/>
+
+            <Label text="The complete exam platform for teachers and students."
+                   style="-fx-font-size: 14px;
+                          -fx-text-fill: #888888;"/>
+
+            <Label text="Create exams, attempt them securely, and get AI-powered feedback — all in one place."
+                   style="-fx-font-size: 13px;
+                          -fx-text-fill: #aaaaaa;"/>
+
+            <HBox spacing="12" alignment="CENTER"
+                  style="-fx-padding: 10 0 0 0;">
+
+                <Button text="Get Started"
+                        onAction="#goToLogin"
+                        style="-fx-background-color: #5B4FCF;
+                               -fx-text-fill: white;
+                               -fx-font-size: 13px;
+                               -fx-font-weight: bold;
+                               -fx-padding: 11 28 11 28;
+                               -fx-background-radius: 8;
+                               -fx-cursor: hand;"/>
+
+                <Button text="See Features"
+                        onAction="#scrollToFeatures"
+                        style="-fx-background-color: white;
+                               -fx-text-fill: #5B4FCF;
+                               -fx-font-size: 13px;
+                               -fx-font-weight: bold;
+                               -fx-padding: 11 28 11 28;
+                               -fx-background-radius: 8;
+                               -fx-border-color: #5B4FCF;
+                               -fx-border-width: 1;
+                               -fx-border-radius: 8;
+                               -fx-cursor: hand;"/>
+            </HBox>
+        </VBox>
+
+        <!-- FEATURES SECTION -->
+        <VBox fx:id="featuresSection"
+              alignment="CENTER" spacing="10"
+              style="-fx-padding: 30 40 30 40;
+                     -fx-background-color: #F7F7F7;">
+
+            <Label text="Built for everyone in the classroom"
+                   style="-fx-font-size: 15px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #1a1a1a;
+                          -fx-padding: 0 0 8 0;"/>
+
+            <HBox spacing="12" alignment="CENTER">
+
+                <!-- Card 1 - For Teachers -->
+                <VBox prefWidth="185" prefHeight="110"
+                      spacing="6" alignment="TOP_LEFT"
+                      style="-fx-background-color: white;
+                             -fx-background-radius: 10;
+                             -fx-border-color: #eeeeee;
+                             -fx-border-radius: 10;
+                             -fx-border-width: 1;
+                             -fx-padding: 14;">
+                    <Label text="📝  For Teachers"
+                           style="-fx-font-size: 12px;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: #5B4FCF;"/>
+                    <Label text="Create exams, import questions from Excel and use AI to generate questions instantly."
+                           wrapText="true"
+                           style="-fx-font-size: 11px;
+                                  -fx-text-fill: #888888;"/>
+                </VBox>
+
+                <!-- Card 2 - For Students -->
+                <VBox prefWidth="185" prefHeight="110"
+                      spacing="6" alignment="TOP_LEFT"
+                      style="-fx-background-color: white;
+                             -fx-background-radius: 10;
+                             -fx-border-color: #eeeeee;
+                             -fx-border-radius: 10;
+                             -fx-border-width: 1;
+                             -fx-padding: 14;">
+                    <Label text="🎓  For Students"
+                           style="-fx-font-size: 12px;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: #1D9E75;"/>
+                    <Label text="Attempt exams with a timer, write real code, and receive AI feedback on your performance."
+                           wrapText="true"
+                           style="-fx-font-size: 11px;
+                                  -fx-text-fill: #888888;"/>
+                </VBox>
+
+                <!-- Card 3 - Secure -->
+                <VBox prefWidth="185" prefHeight="110"
+                      spacing="6" alignment="TOP_LEFT"
+                      style="-fx-background-color: white;
+                             -fx-background-radius: 10;
+                             -fx-border-color: #eeeeee;
+                             -fx-border-radius: 10;
+                             -fx-border-width: 1;
+                             -fx-padding: 14;">
+                    <Label text="🔒  Secure Exams"
+                           style="-fx-font-size: 12px;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: #BA7517;"/>
+                    <Label text="Tab-switch detection, per-student question shuffle and auto-submit keeps exams fair."
+                           wrapText="true"
+                           style="-fx-font-size: 11px;
+                                  -fx-text-fill: #888888;"/>
+                </VBox>
+
+                <!-- Card 4 - Works Offline -->
+                <VBox prefWidth="185" prefHeight="110"
+                      spacing="6" alignment="TOP_LEFT"
+                      style="-fx-background-color: white;
+                             -fx-background-radius: 10;
+                             -fx-border-color: #eeeeee;
+                             -fx-border-radius: 10;
+                             -fx-border-width: 1;
+                             -fx-padding: 14;">
+                    <Label text="📶  Works Offline"
+                           style="-fx-font-size: 12px;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: #185FA5;"/>
+                    <Label text="Fully functional without internet. AI features activate automatically when connected."
+                           wrapText="true"
+                           style="-fx-font-size: 11px;
+                                  -fx-text-fill: #888888;"/>
+                </VBox>
+
+            </HBox>
+        </VBox>
+
+    </VBox>
+
+</StackPane>
