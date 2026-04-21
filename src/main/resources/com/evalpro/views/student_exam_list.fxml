@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.evalpro.controller.student.StudentExamListController"
+            stylesheets="@../styles.css">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
+            <padding><Insets top="15" right="20" bottom="15" left="20"/></padding>
+
+            <!-- ✅ Back to Dashboard Button -->
+            <Button text="← Dashboard" onAction="#handleBackToDashboard"
+                    style="-fx-background-color: #6b7280; -fx-text-fill: white; -fx-padding: 8 16; -fx-background-radius: 6; -fx-cursor: hand; -fx-font-weight: bold;"/>
+
+            <Label text="📚 Available Exams" styleClass="page-title">
+                <font><Font name="System Bold" size="24"/></font>
+            </Label>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Label fx:id="studentNameLabel" text="Student: John Doe" styleClass="info-label">
+                <font><Font size="14"/></font>
+            </Label>
+
+            <Button text="🔄 Refresh" onAction="#handleRefresh" styleClass="secondary-button"/>
+            <Button text="🚪 Logout" onAction="#handleLogout" styleClass="danger-button"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="15">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Filter:"/>
+                <ComboBox fx:id="filterComboBox" promptText="All Exams" prefWidth="150"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Label fx:id="examCountLabel" text="Total: 0 exams" styleClass="info-label"/>
+            </HBox>
+
+            <TableView fx:id="examsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="examIdColumn" text="ID" prefWidth="60"/>
+                    <TableColumn fx:id="examTitleColumn" text="Exam Title" prefWidth="250"/>
+                    <TableColumn fx:id="subjectColumn" text="Subject" prefWidth="150"/>
+                    <TableColumn fx:id="durationColumn" text="Duration (min)" prefWidth="120"/>
+                    <TableColumn fx:id="totalMarksColumn" text="Total Marks" prefWidth="100"/>
+                    <TableColumn fx:id="statusColumn" text="Status" prefWidth="120"/>
+                    <TableColumn fx:id="scoreColumn" text="Score" prefWidth="100"/>
+                    <TableColumn fx:id="actionColumn" text="Action" prefWidth="150"/>
+                </columns>
+
+                <placeholder>
+                    <Label text="No exams available" styleClass="placeholder-text"/>
+                </placeholder>
+            </TableView>
+
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="status-bar">
+            <padding><Insets top="10" right="20" bottom="10" left="20"/></padding>
+            <Label fx:id="statusLabel" text="Ready"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.evalpro.controller.student.StudentDashboardController"
+            stylesheets="@../styles.css">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
+            <padding><Insets top="15" right="20" bottom="15" left="20"/></padding>
+
+            <Label text="📚 EvalPro - Student Dashboard" styleClass="page-title">
+                <font><Font name="System Bold" size="24"/></font>
+            </Label>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <!-- ✅ Refresh Button -->
+            <Button text="🔄" onAction="#handleRefreshDashboard"
+                    style="-fx-background-color: transparent; -fx-font-size: 20px; -fx-cursor: hand;">
+                <tooltip>
+                    <Tooltip text="Refresh Dashboard"/>
+                </tooltip>
+            </Button>
+
+            <!-- Notification Bell -->
+            <StackPane>
+                <Button fx:id="notificationBtn" text="🔔" onAction="#handleNotifications"
+                        style="-fx-background-color: transparent; -fx-font-size: 24px; -fx-cursor: hand;"/>
+                <Label fx:id="notificationBadge" text="0" visible="false"
+                       style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 10;
+                              -fx-padding: 2 6; -fx-font-size: 10px; -fx-font-weight: bold;"
+                       StackPane.alignment="TOP_RIGHT" translateX="-5" translateY="5"/>
+            </StackPane>
+
+            <Button text="👤 Profile" onAction="#handleProfile" styleClass="secondary-button"/>
+            <Button text="🚪 Logout" onAction="#handleLogout" styleClass="danger-button"/>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background: #f8f9fa; -fx-background-color: #f8f9fa;">
+            <VBox spacing="25" style="-fx-padding: 25;">
+
+                <!-- Stats Cards Row -->
+                <HBox spacing="20" alignment="CENTER">
+
+                    <!-- Profile Card -->
+                    <VBox spacing="10" alignment="CENTER"
+                          style="-fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2);
+                                 -fx-background-radius: 15; -fx-padding: 25; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 4);"
+                          prefWidth="280" prefHeight="180">
+                        <Label text="👤" style="-fx-font-size: 48px;"/>
+                        <Label fx:id="studentNameLabel" text="Demo Student"
+                               style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                        <Label fx:id="studentEmailLabel" text="student@evalpro.com"
+                               style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 12px;"/>
+                        <Label fx:id="studentRollLabel" text="Roll No: 2024001"
+                               style="-fx-text-fill: rgba(255,255,255,0.8); -fx-font-size: 11px;"/>
+                    </VBox>
+
+                    <!-- Total Exams Card -->
+                    <VBox spacing="8" alignment="CENTER"
+                          style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 25;
+                                 -fx-border-color: #e5e7eb; -fx-border-radius: 15; -fx-border-width: 1;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);"
+                          prefWidth="200" prefHeight="180">
+                        <Label text="📚" style="-fx-font-size: 36px;"/>
+                        <Label fx:id="totalExamsLabel" text="0"
+                               style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #3b82f6;"/>
+                        <Label text="Total Exams"
+                               style="-fx-text-fill: #6b7280; -fx-font-size: 14px;"/>
+                    </VBox>
+
+                    <!-- Completed Card -->
+                    <VBox spacing="8" alignment="CENTER"
+                          style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 25;
+                                 -fx-border-color: #e5e7eb; -fx-border-radius: 15; -fx-border-width: 1;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);"
+                          prefWidth="200" prefHeight="180">
+                        <Label text="✅" style="-fx-font-size: 36px;"/>
+                        <Label fx:id="completedExamsLabel" text="0"
+                               style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #10b981;"/>
+                        <Label text="Completed"
+                               style="-fx-text-fill: #6b7280; -fx-font-size: 14px;"/>
+                    </VBox>
+
+                    <!-- Pending Card -->
+                    <VBox spacing="8" alignment="CENTER"
+                          style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 25;
+                                 -fx-border-color: #e5e7eb; -fx-border-radius: 15; -fx-border-width: 1;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);"
+                          prefWidth="200" prefHeight="180">
+                        <Label text="⏳" style="-fx-font-size: 36px;"/>
+                        <Label fx:id="pendingExamsLabel" text="0"
+                               style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #f59e0b;"/>
+                        <Label text="Pending"
+                               style="-fx-text-fill: #6b7280; -fx-font-size: 14px;"/>
+                    </VBox>
+
+                </HBox>
+
+                <!-- Available Exams Section -->
+                <VBox spacing="15">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="📚 Available Exams"
+                               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1f2937;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="View All →" onAction="#handleViewAllExams"
+                                style="-fx-background-color: transparent; -fx-text-fill: #3b82f6;
+                                       -fx-font-size: 14px; -fx-cursor: hand; -fx-underline: true;"/>
+                    </HBox>
+
+                    <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;">
+                        <HBox fx:id="examCardsContainer" spacing="20" alignment="CENTER_LEFT">
+                            <!-- Exam cards will be added dynamically -->
+                        </HBox>
+                    </ScrollPane>
+                </VBox>
+
+                <!-- Recent Results Section -->
+                <VBox spacing="15">
+                    <Label text="📊 Recent Results"
+                           style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1f2937;"/>
+
+                    <VBox fx:id="recentResultsContainer" spacing="12"
+                          style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 20;
+                                 -fx-border-color: #e5e7eb; -fx-border-radius: 15; -fx-border-width: 1;">
+                        <!-- Results will be added dynamically -->
+                    </VBox>
+                </VBox>
+
+                <!-- Quick Actions -->
+                <HBox spacing="15" alignment="CENTER">
+                    <Button text="📊 View All Results" onAction="#handleViewResults"
+                            style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-padding: 12 24;
+                                   -fx-background-radius: 8; -fx-font-size: 14px; -fx-cursor: hand;"/>
+                    <Button text="📝 View All Exams" onAction="#handleViewAllExams"
+                            style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-padding: 12 24;
+                                   -fx-background-radius: 8; -fx-font-size: 14px; -fx-cursor: hand;"/>
+                    <Button text="⚙️ Settings" onAction="#handleSettings"
+                            style="-fx-background-color: #6b7280; -fx-text-fill: white; -fx-padding: 12 24;
+                                   -fx-background-radius: 8; -fx-font-size: 14px; -fx-cursor: hand;"/>
+                </HBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.evalpro.controller.teacher.TeacherDashboardController"
+            prefWidth="960" prefHeight="660"
+            style="-fx-background-color: #F0F4F8;">
+
+    <!-- LEFT SIDEBAR -->
+    <left>
+        <VBox prefWidth="210" prefHeight="660"
+              style="-fx-background-color: #1A2744;">
+
+            <!-- Logo -->
+            <HBox alignment="CENTER_LEFT" spacing="10"
+                  style="-fx-padding: 24 16 24 16;
+        -fx-border-color: #2A3A5C;
+                         -fx-border-width: 0 0 1 0;">
+                <StackPane>
+                    <Circle radius="16" style="-fx-fill: #3B82F6;"/>
+                    <Label text="E"
+                           style="-fx-font-size: 12px;
+        -fx-font-weight: bold;
+                                  -fx-text-fill: white;"/>
+                </StackPane>
+                <Label text="EvalPro"
+                       style="-fx-font-size: 16px;
+        -fx-font-weight: bold;
+                              -fx-text-fill: white;"/>
+            </HBox>
+
+            <!-- Teacher Info -->
+            <VBox alignment="CENTER" spacing="6"
+                  style="-fx-padding: 20 16 20 16;
+        -fx-border-color: #2A3A5C;
+                         -fx-border-width: 0 0 1 0;">
+                <StackPane>
+                    <Circle radius="30" style="-fx-fill: #2A3A5C;"/>
+                    <Label fx:id="teacherInitials" text="T"
+                           style="-fx-font-size: 22px;
+        -fx-font-weight: bold;
+                                  -fx-text-fill: #3B82F6;"/>
+                </StackPane>
+                <Label fx:id="teacherName" text="Teacher"
+                       style="-fx-font-size: 13px;
+        -fx-font-weight: bold;
+                              -fx-text-fill: white;"/>
+                <Label text="Teacher"
+                       style="-fx-font-size: 11px;
+        -fx-text-fill: #3B82F6;
+                              -fx-background-color: #1E3A6E;
+                              -fx-padding: 2 12 2 12;
+        -fx-background-radius: 10;"/>
+            </VBox>
+
+            <!-- Nav Menu -->
+            <VBox spacing="2" style="-fx-padding: 16 10 16 10;">
+                <Label text="MENU"
+                       style="-fx-font-size: 10px;
+        -fx-text-fill: #4A5A7A;
+                              -fx-padding: 0 0 8 6;
+        -fx-font-weight: bold;"/>
+
+                <Button fx:id="btnDashboard" text="  Dashboard"
+                        onAction="#showDashboard" prefWidth="190"
+                        style="-fx-background-color: #3B82F6;
+        -fx-text-fill: white;
+                               -fx-font-size: 12px;
+                               -fx-font-weight: bold;
+                               -fx-padding: 10 14 10 14;
+        -fx-background-radius: 8;
+        -fx-alignment: CENTER_LEFT;
+                               -fx-cursor: hand;"/>
+
+                <Button fx:id="btnCreateExam" text="  Create Exam"
+                        onAction="#showCreateExamPopup" prefWidth="190"
+                        style="-fx-background-color: transparent;
+        -fx-text-fill: #A0AEC0;
+                               -fx-font-size: 12px;
+                               -fx-padding: 10 14 10 14;
+        -fx-background-radius: 8;
+        -fx-alignment: CENTER_LEFT;
+                               -fx-cursor: hand;"/>
+
+                <Button fx:id="btnMyExams" text="  My Exams"
+                        onAction="#showMyExams" prefWidth="190"
+                        style="-fx-background-color: transparent;
+        -fx-text-fill: #A0AEC0;
+                               -fx-font-size: 12px;
+                               -fx-padding: 10 14 10 14;
+        -fx-background-radius: 8;
+        -fx-alignment: CENTER_LEFT;
+                               -fx-cursor: hand;"/>
+
+                <Button fx:id="btnQuestionBank" text="  Question Bank"
+                        onAction="#showQuestionBank" prefWidth="190"
+                        style="-fx-background-color: transparent;
+        -fx-text-fill: #A0AEC0;
+                               -fx-font-size: 12px;
+                               -fx-padding: 10 14 10 14;
+        -fx-background-radius: 8;
+        -fx-alignment: CENTER_LEFT;
+                               -fx-cursor: hand;"/>
+
+                <Button fx:id="btnResults" text="  Results"
+                        onAction="#showResults" prefWidth="190"
+                        style="-fx-background-color: transparent;
+        -fx-text-fill: #A0AEC0;
+                               -fx-font-size: 12px;
+                               -fx-padding: 10 14 10 14;
+        -fx-background-radius: 8;
+        -fx-alignment: CENTER_LEFT;
+                               -fx-cursor: hand;"/>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <!-- Logout -->
+            <VBox style="-fx-padding: 10 10 20 10;
+        -fx-border-color: #2A3A5C;
+                         -fx-border-width: 1 0 0 0;">
+                <Button text="  Logout"
+                        onAction="#handleLogout" prefWidth="190"
+                        style="-fx-background-color: transparent;
+        -fx-text-fill: #FC8181;
+                               -fx-font-size: 12px;
+                               -fx-padding: 10 14 10 14;
+        -fx-background-radius: 8;
+        -fx-alignment: CENTER_LEFT;
+                               -fx-cursor: hand;"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- MAIN CONTENT -->
+    <center>
+        <VBox style="-fx-padding: 28 28 28 28;">
+
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" style="-fx-padding: 0 0 22 0;">
+                <VBox HBox.hgrow="ALWAYS">
+                    <Label fx:id="welcomeLabel" text="Welcome back, Teacher!"
+                           style="-fx-font-size: 22px;
+        -fx-font-weight: bold;
+                                  -fx-text-fill: #1A2744;"/>
+                    <Label text="Here is your teaching overview"
+                           style="-fx-font-size: 13px;
+        -fx-text-fill: #718096;"/>
+                </VBox>
+                <Button text="+ Create New Exam"
+                        onAction="#showCreateExamPopup"
+                        style="-fx-background-color: #3B82F6;
+        -fx-text-fill: white;
+                               -fx-font-size: 13px;
+                               -fx-font-weight: bold;
+                               -fx-padding: 10 20 10 20;
+        -fx-background-radius: 8;
+        -fx-cursor: hand;"/>
+            </HBox>
+
+            <!-- Stats Cards -->
+            <HBox spacing="14" style="-fx-padding: 0 0 22 0;">
+
+                <VBox prefWidth="162" prefHeight="95" alignment="CENTER_LEFT"
+                      style="-fx-background-color: white;
+        -fx-background-radius: 12;
+        -fx-border-color: #E2E8F0;
+                             -fx-border-radius: 12;
+        -fx-border-width: 1;
+        -fx-padding: 16;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
+                    <Label text="Total Exams"
+                           style="-fx-font-size: 11px; -fx-text-fill: #718096;"/>
+                    <Label fx:id="totalExamsLabel" text="0"
+                           style="-fx-font-size: 30px;
+        -fx-font-weight: bold;
+                                  -fx-text-fill: #3B82F6;"/>
+                    <Label text="All time"
+                           style="-fx-font-size: 10px; -fx-text-fill: #A0AEC0;"/>
+                </VBox>
+
+                <VBox prefWidth="162" prefHeight="95" alignment="CENTER_LEFT"
+                      style="-fx-background-color: white;
+        -fx-background-radius: 12;
+        -fx-border-color: #E2E8F0;
+                             -fx-border-radius: 12;
+        -fx-border-width: 1;
+        -fx-padding: 16;">
+                    <Label text="Active Exams"
+                           style="-fx-font-size: 11px; -fx-text-fill: #718096;"/>
+                    <Label fx:id="activeExamsLabel" text="0"
+                           style="-fx-font-size: 30px;
+        -fx-font-weight: bold;
+                                  -fx-text-fill: #10B981;"/>
+                    <Label text="Currently live"
+                           style="-fx-font-size: 10px; -fx-text-fill: #A0AEC0;"/>
+                </VBox>
+
+                <VBox prefWidth="162" prefHeight="95" alignment="CENTER_LEFT"
+                      style="-fx-background-color: white;
+        -fx-background-radius: 12;
+        -fx-border-color: #E2E8F0;
+                             -fx-border-radius: 12;
+        -fx-border-width: 1;
+        -fx-padding: 16;">
+                    <Label text="Total Students"
+                           style="-fx-font-size: 11px; -fx-text-fill: #718096;"/>
+                    <Label fx:id="totalStudentsLabel" text="0"
+                           style="-fx-font-size: 30px;
+        -fx-font-weight: bold;
+                                  -fx-text-fill: #6366F1;"/>
+                    <Label text="Registered"
+                           style="-fx-font-size: 10px; -fx-text-fill: #A0AEC0;"/>
+                </VBox>
+
+                <VBox prefWidth="162" prefHeight="95" alignment="CENTER_LEFT"
+                      style="-fx-background-color: white;
+        -fx-background-radius: 12;
+        -fx-border-color: #E2E8F0;
+                             -fx-border-radius: 12;
+        -fx-border-width: 1;
+        -fx-padding: 16;">
+                    <Label text="Questions in Bank"
+                           style="-fx-font-size: 11px; -fx-text-fill: #718096;"/>
+                    <Label fx:id="totalQuestionsLabel" text="0"
+                           style="-fx-font-size: 30px;
+        -fx-font-weight: bold;
+                                  -fx-text-fill: #F59E0B;"/>
+                    <Label text="Ready to use"
+                           style="-fx-font-size: 10px; -fx-text-fill: #A0AEC0;"/>
+                </VBox>
+
+            </HBox>
+
+            <!-- Recent Exams -->
+            <Label text="Recent Exams"
+                   style="-fx-font-size: 14px;
+        -fx-font-weight: bold;
+                          -fx-text-fill: #1A2744;
+                          -fx-padding: 0 0 10 0;"/>
+
+            <TableView fx:id="recentExamsTable" prefHeight="220"
+                       style="-fx-background-color: white;
+                  -fx-border-color: #E2E8F0;
+                  -fx-border-radius: 12;
+                  -fx-background-radius: 12;">
+                <columns>
+                    <TableColumn fx:id="examTitleCol" text="Exam Title" prefWidth="200"/>
+                    <TableColumn fx:id="examDurationCol" text="Duration" prefWidth="80"/>
+                    <TableColumn fx:id="examMarksCol" text="Total Marks" prefWidth="90"/>
+                    <TableColumn fx:id="examStatusCol" text="Status" prefWidth="80"/>
+                    <TableColumn fx:id="examDateCol" text="Created" prefWidth="100"/>
+                    <TableColumn fx:id="examActionsCol" text="Actions" prefWidth="200"/>
+                </columns>
+            </TableView>
+
+            <!-- Quick Actions Row -->
+            <Label text="Quick Actions"
+                   style="-fx-font-size: 14px;
+        -fx-font-weight: bold;
+                          -fx-text-fill: #1A2744;
+                          -fx-padding: 18 0 10 0;"/>
+
+            <HBox spacing="12">
+                <Button text="Create Manually"
+                        onAction="#showCreateExamPopup"
+                        style="-fx-background-color: white;
+        -fx-text-fill: #1A2744;
+                               -fx-font-size: 12px;
+                               -fx-font-weight: bold;
+                               -fx-padding: 10 16 10 16;
+        -fx-background-radius: 8;
+        -fx-border-color: #E2E8F0;
+                               -fx-border-width: 1;
+        -fx-border-radius: 8;
+        -fx-cursor: hand;"/>
+                <Button text="Import from Excel"
+                        onAction="#showCreateExamPopup"
+                        style="-fx-background-color: white;
+        -fx-text-fill: #1A2744;
+                               -fx-font-size: 12px;
+                               -fx-font-weight: bold;
+                               -fx-padding: 10 16 10 16;
+        -fx-background-radius: 8;
+        -fx-border-color: #E2E8F0;
+                               -fx-border-width: 1;
+        -fx-border-radius: 8;
+        -fx-cursor: hand;"/>
+                <Button text="AI Generate"
+                        onAction="#showCreateExamPopup"
+                        style="-fx-background-color: #3B82F6;
+        -fx-text-fill: white;
+                               -fx-font-size: 12px;
+                               -fx-font-weight: bold;
+                               -fx-padding: 10 16 10 16;
+        -fx-background-radius: 8;
+        -fx-cursor: hand;"/>
+                <Button text="View Question Bank"
+                        onAction="#showQuestionBank"
+                        style="-fx-background-color: white;
+        -fx-text-fill: #1A2744;
+                               -fx-font-size: 12px;
+                               -fx-font-weight: bold;
+                               -fx-padding: 10 16 10 16;
+        -fx-background-radius: 8;
+        -fx-border-color: #E2E8F0;
+                               -fx-border-width: 1;
+        -fx-border-radius: 8;
+        -fx-cursor: hand;"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

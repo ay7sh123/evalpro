@@ -45,21 +45,46 @@ public class LoginController {
 
     private void redirectToDashboard(String role, ActionEvent event) {
         try {
-            String fxmlFile = switch (role) {
-                case "teacher" -> "/com/evalpro/views/teacher_dashboard.fxml";
-                case "student" -> "/com/evalpro/views/student_dashboard.fxml";
-                case "admin"   -> "/com/evalpro/views/admin_dashboard.fxml";
-                default -> null;
-            };
+            String fxmlFile = null;
+            int width = 900;
+            int height = 650;
 
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
-            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 900, 650));
-            stage.show();
+            switch (role) {
+                case "teacher":
+                    fxmlFile = "/com/evalpro/views/teacher_dashboard.fxml";
+                    width = 960;
+                    height = 660;
+                    break;
+
+                case "student":
+                    // ✅ CHANGED: Student ko direct exam list pe le jao
+                    fxmlFile = "/com/evalpro/views/student_dashboard.fxml";
+                    width = 1100;
+                    height = 700;
+                    break;
+
+                case "admin":
+                    fxmlFile = "/com/evalpro/views/admin_dashboard.fxml";
+                    break;
+
+                default:
+                    errorLabel.setText("Unknown role: " + role);
+                    return;
+            }
+
+            if (fxmlFile != null) {
+                Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+                Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root, width, height));
+                stage.setTitle("EvalPro - " + capitalize(role));
+                stage.centerOnScreen();
+                stage.show();
+            }
 
         } catch (Exception e) {
-            errorLabel.setStyle("-fx-text-fill: green;");
-            errorLabel.setText("✓ Login works! Dashboard coming in next module.");
+            errorLabel.setStyle("-fx-text-fill: #e53935;");
+            errorLabel.setText("Error loading dashboard: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -72,9 +97,18 @@ public class LoginController {
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root, 900, 650));
             stage.setTitle("EvalPro");
+            stage.centerOnScreen();
             stage.show();
         } catch (Exception e) {
             System.out.println("Error going back: " + e.getMessage());
         }
+    }
+
+    /**
+     * Helper method to capitalize first letter
+     */
+    private String capitalize(String text) {
+        if (text == null || text.isEmpty()) return text;
+        return text.substring(0, 1).toUpperCase() + text.substring(1);
     }
 }

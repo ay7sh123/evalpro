@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.evalpro.controller.student.StudentExamController"
+            stylesheets="@../styles.css">
+
+    <top>
+        <VBox>
+            <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
+                <padding><Insets top="10" right="20" bottom="10" left="20"/></padding>
+
+                <Label fx:id="examTitleLabel" text="Exam Title" styleClass="page-title">
+                    <font><Font name="System Bold" size="20"/></font>
+                </Label>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Label fx:id="timerLabel" text="⏰ 60:00" styleClass="timer-label">
+                    <font><Font name="System Bold" size="24"/></font>
+                </Label>
+            </HBox>
+
+            <HBox fx:id="warningBar" alignment="CENTER" spacing="10"
+                  style="-fx-background-color: #ff6b6b; -fx-padding: 10;" visible="false" managed="false">
+                <Label fx:id="warningLabel" text="⚠️ Warning: Tab switch detected!"
+                       style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <BorderPane>
+
+            <left>
+                <VBox spacing="10" style="-fx-background-color: #f8f9fa; -fx-padding: 15;"
+                      prefWidth="200" BorderPane.alignment="TOP_CENTER">
+
+                    <Label text="Question Palette" styleClass="section-title">
+                        <font><Font name="System Bold" size="14"/></font>
+                    </Label>
+
+                    <Separator/>
+
+                    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                                style="-fx-background: transparent; -fx-background-color: transparent;">
+                        <FlowPane fx:id="questionPalette" hgap="8" vgap="8" prefWrapLength="180"/>
+                    </ScrollPane>
+
+                    <Separator/>
+
+                    <VBox spacing="5">
+                        <HBox spacing="5" alignment="CENTER_LEFT">
+                            <Region prefWidth="20" prefHeight="20"
+                                    style="-fx-background-color: #28a745; -fx-background-radius: 3;"/>
+                            <Label text="Answered" style="-fx-font-size: 11;"/>
+                        </HBox>
+                        <HBox spacing="5" alignment="CENTER_LEFT">
+                            <Region prefWidth="20" prefHeight="20"
+                                    style="-fx-background-color: #ffc107; -fx-background-radius: 3;"/>
+                            <Label text="Current" style="-fx-font-size: 11;"/>
+                        </HBox>
+                        <HBox spacing="5" alignment="CENTER_LEFT">
+                            <Region prefWidth="20" prefHeight="20"
+                                    style="-fx-background-color: #6c757d; -fx-background-radius: 3;"/>
+                            <Label text="Not Answered" style="-fx-font-size: 11;"/>
+                        </HBox>
+                    </VBox>
+
+                </VBox>
+            </left>
+
+            <center>
+                <VBox spacing="20" style="-fx-padding: 20;">
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label fx:id="questionNumberLabel" text="Question 1 of 10" styleClass="section-title">
+                            <font><Font name="System Bold" size="16"/></font>
+                        </Label>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="questionMarksLabel" text="Marks: 2" styleClass="info-label"/>
+                    </HBox>
+
+                    <Separator/>
+
+                    <ScrollPane fitToWidth="true" prefHeight="100"
+                                style="-fx-background: white; -fx-border-color: #dee2e6; -fx-border-radius: 5;">
+                        <VBox style="-fx-padding: 15;">
+                            <Label fx:id="questionTextLabel" text="Question text will appear here..."
+                                   wrapText="true" style="-fx-font-size: 14;"/>
+                        </VBox>
+                    </ScrollPane>
+
+                    <VBox fx:id="answerArea" spacing="15" VBox.vgrow="ALWAYS">
+                        <!-- Dynamic content: MCQ/Theory/Coding -->
+                    </VBox>
+
+                    <HBox spacing="15" alignment="CENTER">
+                        <Button fx:id="previousButton" text="⬅️ Previous" onAction="#handlePrevious"
+                                styleClass="secondary-button" prefWidth="120" disable="true"/>
+                        <Button fx:id="nextButton" text="Next ➡️" onAction="#handleNext"
+                                styleClass="primary-button" prefWidth="120"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="💾 Save" onAction="#handleSaveAndNext"
+                                styleClass="success-button" prefWidth="140"/>
+                        <Button text="🚀 Submit Exam" onAction="#handleSubmit"
+                                styleClass="danger-button" prefWidth="140"/>
+                    </HBox>
+
+                </VBox>
+            </center>
+
+        </BorderPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="status-bar">
+            <padding><Insets top="10" right="20" bottom="10" left="20"/></padding>
+            <Label fx:id="progressLabel" text="Progress: 0/10 answered"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="tabSwitchLabel" text="Tab switches: 0/3"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

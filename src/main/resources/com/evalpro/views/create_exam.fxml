@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.evalpro.controller.teacher.CreateExamController"
+            prefWidth="1024" prefHeight="700"
+            style="-fx-background-color: #F0F4F8;">
+
+    <!-- TOP HEADER -->
+    <top>
+        <HBox alignment="CENTER_LEFT"
+              style="-fx-padding: 20;
+                     -fx-background-color: white;
+                     -fx-border-color: #E2E8F0;
+                     -fx-border-width: 0 0 1 0;">
+
+            <Button text="← Back"
+                    onAction="#handleBack"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: #3B82F6;
+                           -fx-font-size: 13px;
+                           -fx-cursor: hand;"/>
+
+            <Label text="Create Exam"
+                   style="-fx-font-size: 20px;
+                          -fx-font-weight: bold;
+                          -fx-padding: 0 0 0 20;"/>
+        </HBox>
+    </top>
+
+    <!-- MAIN CONTENT -->
+    <center>
+        <ScrollPane fitToWidth="true"
+                    style="-fx-background-color: transparent;">
+            <VBox spacing="20" style="-fx-padding: 30;">
+
+                <!-- SECTION 1: EXAM DETAILS -->
+                <VBox spacing="15"
+                      style="-fx-background-color: white;
+                             -fx-padding: 20;
+                             -fx-background-radius: 10;
+                             -fx-border-color: #E2E8F0;
+                             -fx-border-radius: 10;">
+
+                    <Label text="Exam Details"
+                           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                    <!-- Title -->
+                    <VBox spacing="5">
+                        <Label text="Exam Title"
+                               style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+                        <TextField fx:id="titleField"
+                                   promptText="e.g., Data Structures Mid-Term"
+                                   prefWidth="500"/>
+                    </VBox>
+
+                    <HBox spacing="15">
+                        <!-- Duration -->
+                        <VBox spacing="5">
+                            <Label text="Duration (minutes)"
+                                   style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+                            <TextField fx:id="durationField"
+                                       promptText="e.g., 60"
+                                       prefWidth="150"/>
+                        </VBox>
+
+                        <!-- Status -->
+                        <VBox spacing="5">
+                            <Label text="Status"
+                                   style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+                            <ComboBox fx:id="statusBox" prefWidth="150"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Description -->
+                    <VBox spacing="5">
+                        <Label text="Description (Optional)"
+                               style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+                        <TextArea fx:id="descriptionField"
+                                  promptText="Enter exam description or instructions"
+                                  prefHeight="60"
+                                  wrapText="true"/>
+                    </VBox>
+
+                    <!-- Shuffle -->
+                    <CheckBox fx:id="shuffleCheck"
+                              text="Shuffle questions for each student"
+                              selected="true"/>
+
+                </VBox>
+
+                <!-- SECTION 2: AI GENERATION -->
+                <VBox spacing="15"
+                      style="-fx-background-color: #EBF4FF;
+                             -fx-padding: 20;
+                             -fx-background-radius: 10;
+                             -fx-border-color: #3B82F6;
+                             -fx-border-radius: 10;">
+
+                    <Label text="AI Question Generator"
+                           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                    <!-- From Topic -->
+                    <VBox spacing="10"
+                          style="-fx-background-color: white;
+                                 -fx-padding: 15;
+                                 -fx-background-radius: 8;">
+                        <Label text="Generate from Topic Name"
+                               style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                        <HBox spacing="10">
+                            <TextField fx:id="topicField"
+                                       promptText="e.g., Binary Trees, Recursion"
+                                       prefWidth="400"/>
+                            <Button text="Generate"
+                                    onAction="#handleGenerateFromTopic"
+                                    style="-fx-background-color: #3B82F6;
+                                           -fx-text-fill: white;
+                                           -fx-padding: 8 16;"/>
+                        </HBox>
+                    </VBox>
+
+                    <!-- From URL -->
+                    <VBox spacing="10"
+                          style="-fx-background-color: white;
+                                 -fx-padding: 15;
+                                 -fx-background-radius: 8;">
+                        <Label text="Generate from Website URL"
+                               style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                        <HBox spacing="10">
+                            <TextField fx:id="urlField"
+                                       promptText="https://www.geeksforgeeks.org/..."
+                                       prefWidth="500"/>
+                            <Button text="Generate"
+                                    onAction="#handleGenerateFromURL"
+                                    style="-fx-background-color: #8B5CF6;
+                                           -fx-text-fill: white;
+                                           -fx-padding: 8 16;"/>
+                        </HBox>
+
+                        <!-- AI Status -->
+                        <HBox fx:id="aiStatusBox" spacing="8"
+                              style="-fx-background-color: #DBEAFE;
+                                     -fx-padding: 10;
+                                     -fx-background-radius: 6;"
+                              visible="false">
+                            <ProgressIndicator fx:id="aiProgress"
+                                               prefWidth="20" prefHeight="20"/>
+                            <Label fx:id="aiStatusLabel"
+                                   text="AI is working..."
+                                   style="-fx-text-fill: #1E40AF;"/>
+                        </HBox>
+                    </VBox>
+
+                </VBox>
+
+                <!-- SECTION 3: QUESTIONS -->
+                <VBox spacing="15"
+                      style="-fx-background-color: white;
+                             -fx-padding: 20;
+                             -fx-background-radius: 10;
+                             -fx-border-color: #E2E8F0;
+                             -fx-border-radius: 10;">
+
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="Questions"
+                               style="-fx-font-size: 16px; -fx-font-weight: bold;"
+                               HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="questionCountLabel"
+                               text="0 questions"
+                               style="-fx-text-fill: #64748B;"/>
+                    </HBox>
+
+                    <!-- Questions Container -->
+                    <VBox fx:id="questionsContainer" spacing="10">
+                        <Label text="No questions added yet"
+                               style="-fx-text-fill: #718096;
+                                      -fx-padding: 30 20;
+                                      -fx-alignment: center;"/>
+                    </VBox>
+
+                    <!-- Add Buttons -->
+                    <HBox spacing="10">
+                        <Button text="Add MCQ"
+                                onAction="#handleAddMCQ"
+                                style="-fx-background-color: #E0E7FF;
+                                       -fx-text-fill: #3730A3;
+                                       -fx-padding: 8 16;"/>
+                        <Button text="Add Theory"
+                                onAction="#handleAddTheory"
+                                style="-fx-background-color: #DBEAFE;
+                                       -fx-text-fill: #1E40AF;
+                                       -fx-padding: 8 16;"/>
+                        <Button text="Add Coding"
+                                onAction="#handleAddCoding"
+                                style="-fx-background-color: #D1FAE5;
+                                       -fx-text-fill: #065F46;
+                                       -fx-padding: 8 16;"/>
+                        <Button text="Question Bank"
+                                onAction="#handlePickFromBank"
+                                style="-fx-background-color: #FEF3C7;
+                                       -fx-text-fill: #92400E;
+                                       -fx-padding: 8 16;"/>
+                    </HBox>
+
+                </VBox>
+
+                <!-- SECTION 4: SUMMARY -->
+                <HBox spacing="20" alignment="CENTER"
+                      style="-fx-background-color: #EBF5FF;
+                             -fx-padding: 20;
+                             -fx-background-radius: 10;
+                             -fx-border-color: #3B82F6;
+                             -fx-border-width: 2;
+                             -fx-border-radius: 10;">
+
+                    <VBox alignment="CENTER" spacing="5">
+                        <Label text="Total Questions"
+                               style="-fx-font-size: 11px; -fx-text-fill: #64748B;"/>
+                        <Label fx:id="totalQuestionsLabel" text="0"
+                               style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #3B82F6;"/>
+                    </VBox>
+
+                    <Separator orientation="VERTICAL"/>
+
+                    <VBox alignment="CENTER" spacing="5">
+                        <Label text="Total Marks"
+                               style="-fx-font-size: 11px; -fx-text-fill: #64748B;"/>
+                        <Label fx:id="totalMarksLabel" text="0"
+                               style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #10B981;"/>
+                        <Label text="Auto-calculated"
+                               style="-fx-font-size: 10px; -fx-text-fill: #3B82F6;"/>
+                    </VBox>
+
+                    <Separator orientation="VERTICAL"/>
+
+                    <VBox alignment="CENTER" spacing="5">
+                        <Label text="Duration"
+                               style="-fx-font-size: 11px; -fx-text-fill: #64748B;"/>
+                        <Label fx:id="durationDisplayLabel" text="-- min"
+                               style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #F59E0B;"/>
+                    </VBox>
+
+                </HBox>
+
+                <!-- SAVE BUTTONS -->
+                <HBox spacing="15" alignment="CENTER_RIGHT">
+                    <Button text="Save as Draft"
+                            onAction="#handleSaveDraft"
+                            style="-fx-background-color: #E2E8F0;
+                                   -fx-text-fill: #1A2744;
+                                   -fx-font-size: 14px;
+                                   -fx-font-weight: bold;
+                                   -fx-padding: 12 24;
+                                   -fx-background-radius: 8;"/>
+
+                    <Button text="Save and Publish"
+                            onAction="#handleSaveExam"
+                            style="-fx-background-color: #3B82F6;
+                                   -fx-text-fill: white;
+                                   -fx-font-size: 14px;
+                                   -fx-font-weight: bold;
+                                   -fx-padding: 12 24;
+                                   -fx-background-radius: 8;"/>
+                </HBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

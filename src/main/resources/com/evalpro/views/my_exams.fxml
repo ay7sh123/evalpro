@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.evalpro.controller.teacher.MyExamsController"
+            prefWidth="1024" prefHeight="700"
+            style="-fx-background-color: #F0F4F8;">
+
+    <!-- TOP HEADER -->
+    <top>
+        <HBox alignment="CENTER_LEFT"
+              style="-fx-padding: 20;
+                     -fx-background-color: white;
+                     -fx-border-color: #E2E8F0;
+                     -fx-border-width: 0 0 1 0;">
+
+            <Button text="← Back to Dashboard"
+                    onAction="#handleBack"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: #3B82F6;
+                           -fx-font-size: 13px;
+                           -fx-cursor: hand;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Label text="My Exams"
+                   style="-fx-font-size: 20px;
+                          -fx-font-weight: bold;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="+ Create New Exam"
+                    onAction="#handleCreateExam"
+                    style="-fx-background-color: #3B82F6;
+                           -fx-text-fill: white;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: bold;
+                           -fx-padding: 10 20;
+                           -fx-background-radius: 8;
+                           -fx-cursor: hand;"/>
+        </HBox>
+    </top>
+
+    <!-- MAIN CONTENT -->
+    <center>
+        <VBox spacing="20" style="-fx-padding: 30;">
+
+            <!-- Filter Tabs -->
+            <HBox spacing="10">
+                <Button fx:id="allTab" text="All Exams"
+                        onAction="#showAllExams"
+                        style="-fx-background-color: #3B82F6;
+                               -fx-text-fill: white;
+                               -fx-padding: 8 16;
+                               -fx-background-radius: 6;"/>
+                <Button fx:id="activeTab" text="Active"
+                        onAction="#showActiveExams"
+                        style="-fx-background-color: #E2E8F0;
+                               -fx-text-fill: #1A2744;
+                               -fx-padding: 8 16;
+                               -fx-background-radius: 6;"/>
+                <Button fx:id="draftTab" text="Drafts"
+                        onAction="#showDraftExams"
+                        style="-fx-background-color: #E2E8F0;
+                               -fx-text-fill: #1A2744;
+                               -fx-padding: 8 16;
+                               -fx-background-radius: 6;"/>
+                <Button fx:id="closedTab" text="Closed"
+                        onAction="#showClosedExams"
+                        style="-fx-background-color: #E2E8F0;
+                               -fx-text-fill: #1A2744;
+                               -fx-padding: 8 16;
+                               -fx-background-radius: 6;"/>
+            </HBox>
+
+            <!-- Exams Table -->
+            <TableView fx:id="examsTable"
+                       style="-fx-background-color: white;
+                              -fx-background-radius: 10;
+                              -fx-border-color: #E2E8F0;
+                              -fx-border-radius: 10;">
+                <columns>
+                    <TableColumn fx:id="titleCol" text="Exam Title" prefWidth="250"/>
+                    <TableColumn fx:id="durationCol" text="Duration" prefWidth="100"/>
+                    <TableColumn fx:id="marksCol" text="Total Marks" prefWidth="100"/>
+                    <TableColumn fx:id="questionsCol" text="Questions" prefWidth="100"/>
+                    <TableColumn fx:id="statusCol" text="Status" prefWidth="100"/>
+                    <TableColumn fx:id="createdCol" text="Created" prefWidth="120"/>
+                    <TableColumn fx:id="actionsCol" text="Actions" prefWidth="250"/>
+                </columns>
+            </TableView>
+
+        </VBox>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.evalpro.controller.teacher.ViewExamController"
+            prefWidth="1100" prefHeight="750"
+            style="-fx-background-color: #F0F4F8;">
+
+    <!-- TOP HEADER -->
+    <top>
+        <VBox style="-fx-background-color: white;
+                     -fx-border-color: #E2E8F0;
+                     -fx-border-width: 0 0 1 0;">
+
+            <!-- Navigation -->
+            <HBox alignment="CENTER_LEFT" spacing="20"
+                  style="-fx-padding: 20;">
+                <Button text="← Back"
+                        onAction="#handleBack"
+                        style="-fx-background-color: transparent;
+                               -fx-text-fill: #3B82F6;
+                               -fx-font-size: 13px;
+                               -fx-cursor: hand;"/>
+
+                <Label fx:id="examTitleLabel" text="Exam Title"
+                       style="-fx-font-size: 22px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #1A2744;"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Label fx:id="examStatusLabel" text="DRAFT"
+                       style="-fx-background-color: #FEF3C7;
+                              -fx-text-fill: #92400E;
+                              -fx-padding: 6 16;
+                              -fx-background-radius: 20;
+                              -fx-font-weight: bold;
+                              -fx-font-size: 12px;"/>
+            </HBox>
+
+            <!-- Exam Info Cards -->
+            <HBox spacing="15" style="-fx-padding: 0 20 20 20;">
+                <VBox style="-fx-background-color: #EBF5FF;
+                             -fx-padding: 12;
+                             -fx-background-radius: 8;
+                             -fx-spacing: 5;">
+                    <Label text="Duration"
+                           style="-fx-font-size: 11px; -fx-text-fill: #64748B;"/>
+                    <Label fx:id="durationLabel" text="60 min"
+                           style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #3B82F6;"/>
+                </VBox>
+
+                <VBox style="-fx-background-color: #D1FAE5;
+                             -fx-padding: 12;
+                             -fx-background-radius: 8;
+                             -fx-spacing: 5;">
+                    <Label text="Total Marks"
+                           style="-fx-font-size: 11px; -fx-text-fill: #64748B;"/>
+                    <Label fx:id="totalMarksLabel" text="100"
+                           style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #10B981;"/>
+                </VBox>
+
+                <VBox style="-fx-background-color: #FEF3C7;
+                             -fx-padding: 12;
+                             -fx-background-radius: 8;
+                             -fx-spacing: 5;">
+                    <Label text="Total Questions"
+                           style="-fx-font-size: 11px; -fx-text-fill: #64748B;"/>
+                    <Label fx:id="questionCountLabel" text="0"
+                           style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F59E0B;"/>
+                </VBox>
+
+                <VBox style="-fx-background-color: #E0E7FF;
+                             -fx-padding: 12;
+                             -fx-background-radius: 8;
+                             -fx-spacing: 5;">
+                    <Label text="Shuffle Questions"
+                           style="-fx-font-size: 11px; -fx-text-fill: #64748B;"/>
+                    <Label fx:id="shuffleLabel" text="Enabled"
+                           style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #4F46E5;"/>
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <VBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button fx:id="addQuestionBtn" text="+ Add Question"
+                            onAction="#handleAddQuestion"
+                            style="-fx-background-color: #3B82F6;
+                                   -fx-text-fill: white;
+                                   -fx-font-size: 12px;
+                                   -fx-font-weight: bold;
+                                   -fx-padding: 8 16;
+                                   -fx-background-radius: 6;
+                                   -fx-cursor: hand;"/>
+                    <Button fx:id="publishBtn" text="Publish Exam"
+                            onAction="#handlePublishExam"
+                            visible="false"
+                            style="-fx-background-color: #10B981;
+                                   -fx-text-fill: white;
+                                   -fx-font-size: 12px;
+                                   -fx-font-weight: bold;
+                                   -fx-padding: 8 16;
+                                   -fx-background-radius: 6;
+                                   -fx-cursor: hand;"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- MAIN CONTENT -->
+    <center>
+        <ScrollPane fitToWidth="true"
+                    style="-fx-background-color: transparent;">
+            <VBox spacing="20" style="-fx-padding: 30;">
+
+                <!-- Description Section -->
+                <VBox spacing="10"
+                      style="-fx-background-color: white;
+                             -fx-padding: 20;
+                             -fx-background-radius: 10;
+                             -fx-border-color: #E2E8F0;
+                             -fx-border-radius: 10;">
+                    <Label text="Description"
+                           style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <TextArea fx:id="descriptionArea"
+                              wrapText="true"
+                              prefHeight="60"
+                              editable="false"
+                              style="-fx-background-color: #F9FAFB;"/>
+                </VBox>
+
+                <!-- Questions Section -->
+                <VBox spacing="15">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="Questions"
+                               style="-fx-font-size: 16px; -fx-font-weight: bold;"
+                               HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="questionsInfoLabel" text="No questions added yet"
+                               style="-fx-text-fill: #64748B; -fx-font-size: 13px;"/>
+                    </HBox>
+
+                    <!-- Questions Container -->
+                    <VBox fx:id="questionsContainer" spacing="12">
+                        <!-- Questions will be dynamically added here -->
+                    </VBox>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <!-- BOTTOM ACTION BAR -->
+    <bottom>
+        <HBox spacing="15" alignment="CENTER_RIGHT"
+              style="-fx-padding: 20;
+                     -fx-background-color: white;
+                     -fx-border-color: #E2E8F0;
+                     -fx-border-width: 1 0 0 0;">
+            <Button text="Delete Exam"
+                    onAction="#handleDeleteExam"
+                    style="-fx-background-color: #FEE2E2;
+                           -fx-text-fill: #EF4444;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: bold;
+                           -fx-padding: 10 20;
+                           -fx-background-radius: 8;
+                           -fx-cursor: hand;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="Save Changes"
+                    onAction="#handleSaveChanges"
+                    style="-fx-background-color: #3B82F6;
+                           -fx-text-fill: white;
+                           -fx-font-size: 13px;
+                           -fx-font-weight: bold;
+                           -fx-padding: 10 20;
+                           -fx-background-radius: 8;
+                           -fx-cursor: hand;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

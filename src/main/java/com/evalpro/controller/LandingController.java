@@ -63,7 +63,7 @@ public class LandingController {
                 "EvalPro is an AI-powered desktop examination platform.\n\n" +
                         "Built with JavaFX + SQLite + Gemini AI\n\n" +
                         "Features:\n" +
-                        "  • AI Question Generation\n" +
+                        "  • AI Question Generator\n" +
                         "  • Built-in Coding Editor\n" +
                         "  • Smart Auto Scoring\n" +
                         "  • Tab Switch Detection\n" +
