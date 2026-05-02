@@ -13,8 +13,7 @@ import javafx.stage.Stage;
 
 public class LandingController {
 
-    @FXML private VBox featuresSection;
-
+    @FXML private VBox featuresSection
     @FXML
     private void goToLogin(ActionEvent event) {
         try {
